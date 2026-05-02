@@ -14,14 +14,10 @@ TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN', '').strip()
 TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID', '').strip()
 
 def send_tg_notification(message):
-    """Send Telegram notification
-    
-    Args:
-        message: The message to send
-    """
+    """Send Telegram notification when Telegram is configured."""
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
-        print("Telegram configuration is incomplete, cannot send notification", flush=True)
-        sys.exit(1)
+        print("Telegram configuration is incomplete, skipping notification", flush=True)
+        return
     
     # build the request parameters
     params = urllib.parse.urlencode({
